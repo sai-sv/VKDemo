@@ -64,7 +64,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         
         let photoAttachmentViewModel = photoViewModel(item)
         
-        let sizes = cellLayoutCalculator.sizes(text: item.text, photoAttachment: photoAttachmentViewModel)
+        let sizes = cellLayoutCalculator.sizes(postText: item.text, postPhotoAttachment: photoAttachmentViewModel)
         
         return FeedViewModel.CellViewModel(icon: profile?.photo ?? "",
                                                    name: profile?.name ?? "",

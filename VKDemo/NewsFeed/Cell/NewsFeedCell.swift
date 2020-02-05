@@ -95,7 +95,7 @@ class NewsFeedCell: UITableViewCell {
         
         postTextLabel.frame = model.sizes.textFrame
         postImageView.frame = model.sizes.photoAttachmentFrame
-        //bottomView.frame = model.sizes.bottomViewFrame
+        bottomView.frame = model.sizes.bottomViewFrame
     }
     
 }
