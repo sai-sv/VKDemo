@@ -46,7 +46,7 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet weak var postImageView: WebImageView!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
-    @IBOutlet weak var repostsLabel: UILabel!
+    @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
     
@@ -90,12 +90,11 @@ class NewsFeedCell: UITableViewCell {
         
         likesLabel.text = model.likes
         commentsLabel.text = model.comments
-        repostsLabel.text = model.reposts
+        sharesLabel.text = model.reposts
         viewsLabel.text = model.views
         
         postTextLabel.frame = model.sizes.textFrame
         postImageView.frame = model.sizes.photoAttachmentFrame
         bottomView.frame = model.sizes.bottomViewFrame
-    }
-    
+    }    
 }

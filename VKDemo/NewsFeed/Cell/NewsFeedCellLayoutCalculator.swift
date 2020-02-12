@@ -21,14 +21,6 @@ struct CellSizes: NewsFeedCellSizes {
     var totalHeight: CGFloat
 }
 
-struct Constants {
-    static let cardViewInsets = UIEdgeInsets(top: 0, left: 8, bottom: 12, right: 8)
-    static let topViewHeight: CGFloat = 36
-    static let textInsets = UIEdgeInsets(top: 8 + topViewHeight + 8, left: 8, bottom: 8, right: 8)
-    static let textFont = UIFont.systemFont(ofSize: 15)
-    static let bottomViewHeight: CGFloat = 44
-}
-
 final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
     
     private var screenWidth: CGFloat
@@ -42,16 +34,16 @@ final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
         let cardViewWidth = screenWidth - Constants.cardViewInsets.left - Constants.cardViewInsets.right
         
         // MARK: - post text frame
-        var postTextFrame = CGRect(origin: CGPoint(x: Constants.textInsets.left, y: Constants.textInsets.top), size: CGSize.zero)
+        var postTextFrame = CGRect(origin: CGPoint(x: Constants.postTextInsets.left, y: Constants.postTextInsets.top), size: CGSize.zero)
         if let text = postText, !text.isEmpty {
-            let width = cardViewWidth - Constants.textInsets.left - Constants.textInsets.right
-            let height = text.height(width: width, font: Constants.textFont)
+            let width = cardViewWidth - Constants.postTextInsets.left - Constants.postTextInsets.right
+            let height = text.height(width: width, font: Constants.postTextFont)
             postTextFrame.size = CGSize(width: width, height: height)
         }
         
         // MARK: - post photo attachment frame
-        let photoAttacmentTop = postTextFrame.size == CGSize.zero ? Constants.textInsets.top : postTextFrame.maxY + Constants.textInsets.bottom
-        var postPhotoAttachmentFrame = CGRect(origin: CGPoint(x: 0, y: photoAttacmentTop), size: CGSize.zero)
+        let photoAttachmentTop = postTextFrame.size == CGSize.zero ? Constants.postTextInsets.top : postTextFrame.maxY + Constants.postTextInsets.bottom
+        var postPhotoAttachmentFrame = CGRect(origin: CGPoint(x: 0, y: photoAttachmentTop), size: CGSize.zero)
         if let photoAttachment = postPhotoAttachment {
             
             let ratio = CGFloat(CGFloat(photoAttachment.height) / CGFloat(photoAttachment.width))

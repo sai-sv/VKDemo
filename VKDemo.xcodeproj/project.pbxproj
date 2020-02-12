@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844C2A0323F18D5300DE9F13 /* NewsFeedCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */; };
 		8488C57123AFCE400037F8C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488C57023AFCE400037F8C0 /* AppDelegate.swift */; };
 		8488C57323AFCE400037F8C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488C57223AFCE400037F8C0 /* SceneDelegate.swift */; };
 		8488C57A23AFCE410037F8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8488C57923AFCE410037F8C0 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		84CB559F23B7FD3D00C4FD10 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB559E23B7FD3D00C4FD10 /* WebImageView.swift */; };
 		84CB55CE23E9D0EA00C4FD10 /* NewsFeedCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB55CD23E9D0EA00C4FD10 /* NewsFeedCellLayoutCalculator.swift */; };
 		84CB55D023E9E61B00C4FD10 /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB55CF23E9E61B00C4FD10 /* String + Height.swift */; };
+		84CB55D223F15F8200C4FD10 /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB55D123F15F8200C4FD10 /* NewsFeedCodeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellConstants.swift; sourceTree = "<group>"; };
 		8488C56D23AFCE400037F8C0 /* VKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8488C57023AFCE400037F8C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8488C57223AFCE400037F8C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 		84CB559E23B7FD3D00C4FD10 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		84CB55CD23E9D0EA00C4FD10 /* NewsFeedCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellLayoutCalculator.swift; sourceTree = "<group>"; };
 		84CB55CF23E9E61B00C4FD10 /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
+		84CB55D123F15F8200C4FD10 /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 		84CB559723B6B9D400C4FD10 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */,
+				84CB55D123F15F8200C4FD10 /* NewsFeedCodeCell.swift */,
 				84CB559823B6BB2A00C4FD10 /* NewsFeedCell.swift */,
 				84CB559923B6BB2A00C4FD10 /* NewsFeedCell.xib */,
 				84CB55CD23E9D0EA00C4FD10 /* NewsFeedCellLayoutCalculator.swift */,
@@ -307,6 +313,7 @@
 				84CB559323B661B500C4FD10 /* NewsfeedResponse.swift in Sources */,
 				84CB558D23B6585500C4FD10 /* DataFetcher.swift in Sources */,
 				84CB55D023E9E61B00C4FD10 /* String + Height.swift in Sources */,
+				84CB55D223F15F8200C4FD10 /* NewsFeedCodeCell.swift in Sources */,
 				8488C57123AFCE400037F8C0 /* AppDelegate.swift in Sources */,
 				8488C58F23AFCE6F0037F8C0 /* NewsFeedModels.swift in Sources */,
 				8488C59F23AFD1BB0037F8C0 /* AuthViewController.swift in Sources */,
@@ -320,6 +327,7 @@
 				84CB55CE23E9D0EA00C4FD10 /* NewsFeedCellLayoutCalculator.swift in Sources */,
 				8488C59123AFCE6F0037F8C0 /* NewsFeedInteractor.swift in Sources */,
 				8488C5A423AFDDBD0037F8C0 /* UIResponder+Scene.swift in Sources */,
+				844C2A0323F18D5300DE9F13 /* NewsFeedCellConstants.swift in Sources */,
 				84CB558B23B6580300C4FD10 /* NetworkService.swift in Sources */,
 				84CB559A23B6BB2A00C4FD10 /* NewsFeedCell.swift in Sources */,
 				8488C59023AFCE6F0037F8C0 /* NewsFeedViewController.swift in Sources */,
