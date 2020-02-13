@@ -14,11 +14,12 @@ enum NewsFeed {
         struct Request {
             enum RequestType {
                 case getNewsFeed
+                case revealPostText(postId: Int)
             }
         }
         struct Response {
             enum ResponseType {
-                case newsFeedResponse(response: NewsFeedResponse)
+                case newsFeedResponse(response: NewsFeedResponse, revealedPostIds: [Int])
             }
         }
         struct ViewModel {
@@ -32,6 +33,7 @@ enum NewsFeed {
 struct FeedViewModel {
     
     struct CellViewModel: NewsFeedCellViewModel {
+        var postId: Int
         var icon: String
         var name: String
         var date: String

@@ -15,9 +15,9 @@ protocol NewsFeedPresentationLogic {
 class NewsFeedPresenter: NewsFeedPresentationLogic {
     weak var viewController: NewsFeedDisplayLogic?
     private let cellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol = NewsFeedCellLayoutCalculator()
-       
+    
     private let dateFormatter: DateFormatter = {
-       let dt = DateFormatter()
+        let dt = DateFormatter()
         dt.locale = Locale(identifier: "ru_RU")
         dt.dateFormat = "d MMM 'в' HH:mm"
         return dt
@@ -26,10 +26,10 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     func presentData(response: NewsFeed.Model.Response.ResponseType) {
         
         switch response {
-        case .newsFeedResponse(let response):
+        case .newsFeedResponse(let response, let revealedPostIds):
             let cells = response.items.map { (item) in
-                    
-                cellViewModel(item, profiles: response.profiles, groups: response.groups)
+                
+                cellViewModel(item, profiles: response.profiles, groups: response.groups, revealedPostIds: revealedPostIds)
             }
             let viewModel = FeedViewModel(cells: cells)
             
@@ -55,7 +55,9 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         return nil
     }
     
-    private func cellViewModel(_ item: NewsFeedItem, profiles: [UserProfile], groups: [GroupProfile]) -> FeedViewModel.CellViewModel {
+    private func cellViewModel(_ item: NewsFeedItem, profiles: [UserProfile], groups: [GroupProfile], revealedPostIds: [Int]) -> FeedViewModel.CellViewModel {
+        
+        let postId = item.postId
         
         let profile = self.profile(item.sourceId, profiles: profiles, groups: groups)
         
@@ -64,17 +66,21 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         
         let photoAttachmentViewModel = photoViewModel(item)
         
-        let sizes = cellLayoutCalculator.sizes(postText: item.text, postPhotoAttachment: photoAttachmentViewModel)
+        // is post text revealed by user interaction
+        let isPostTextRevealed = revealedPostIds.contains(postId)
         
-        return FeedViewModel.CellViewModel(icon: profile?.photo ?? "",
-                                                   name: profile?.name ?? "",
-                                                   date: dateTitle,
-                                                   text: item.text,
-                                                   likes: String(item.likes?.count ?? 0),
-                                                   comments: String(item.comments?.count ?? 0),
-                                                   reposts: String(item.reposts?.count ?? 0),
-                                                   views: String(item.views?.count ?? 0),
-                                                   photoAttachment: photoAttachmentViewModel,
-                                                   sizes: sizes)
+        let sizes = cellLayoutCalculator.sizes(postText: item.text, postPhotoAttachment: photoAttachmentViewModel, isPostTextRevealed: isPostTextRevealed)
+        
+        return FeedViewModel.CellViewModel(postId: postId,
+                                           icon: profile?.photo ?? "",
+                                           name: profile?.name ?? "",
+                                           date: dateTitle,
+                                           text: item.text,
+                                           likes: String(item.likes?.count ?? 0),
+                                           comments: String(item.comments?.count ?? 0),
+                                           reposts: String(item.reposts?.count ?? 0),
+                                           views: String(item.views?.count ?? 0),
+                                           photoAttachment: photoAttachmentViewModel,
+                                           sizes: sizes)
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		844C2A0323F18D5300DE9F13 /* NewsFeedCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */; };
+		844C2A0523F5357200DE9F13 /* NewsFeedCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C2A0423F5357200DE9F13 /* NewsFeedCellProtocol.swift */; };
 		8488C57123AFCE400037F8C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488C57023AFCE400037F8C0 /* AppDelegate.swift */; };
 		8488C57323AFCE400037F8C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488C57223AFCE400037F8C0 /* SceneDelegate.swift */; };
 		8488C57A23AFCE410037F8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8488C57923AFCE410037F8C0 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellConstants.swift; sourceTree = "<group>"; };
+		844C2A0423F5357200DE9F13 /* NewsFeedCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCellProtocol.swift; sourceTree = "<group>"; };
 		8488C56D23AFCE400037F8C0 /* VKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8488C57023AFCE400037F8C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8488C57223AFCE400037F8C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				844C2A0223F18D5300DE9F13 /* NewsFeedCellConstants.swift */,
+				844C2A0423F5357200DE9F13 /* NewsFeedCellProtocol.swift */,
 				84CB55D123F15F8200C4FD10 /* NewsFeedCodeCell.swift */,
 				84CB559823B6BB2A00C4FD10 /* NewsFeedCell.swift */,
 				84CB559923B6BB2A00C4FD10 /* NewsFeedCell.xib */,
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CB558F23B6587100C4FD10 /* NetworkDataFetcher.swift in Sources */,
+				844C2A0523F5357200DE9F13 /* NewsFeedCellProtocol.swift in Sources */,
 				84CB559323B661B500C4FD10 /* NewsfeedResponse.swift in Sources */,
 				84CB558D23B6585500C4FD10 /* DataFetcher.swift in Sources */,
 				84CB55D023E9E61B00C4FD10 /* String + Height.swift in Sources */,

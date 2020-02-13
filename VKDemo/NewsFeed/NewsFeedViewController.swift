@@ -93,11 +93,26 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = model.cells[indexPath.row]
         cell.configure(with: cellViewModel)
         
+        // handle show more text button touch action
+        cell.delegate = self
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = model.cells[indexPath.row]
         return cellViewModel.sizes.totalHeight
+    }
+}
+
+extension NewsFeedViewController: NewsFeedCodeCellDelegate {
+    func revealPost(for cell: NewsFeedCodeCell) {
+        
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let cellViewModel = model.cells[indexPath.row]
+        let postId = cellViewModel.postId
+        
+        print("post id: \(postId)")
+        interactor?.makeRequest(request: .revealPostText(postId: postId))
     }
 }

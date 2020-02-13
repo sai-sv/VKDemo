@@ -11,11 +11,12 @@ import UIKit
 
 protocol NewsFeedCellLayoutCalculatorProtocol {
     
-    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?) -> NewsFeedCellSizes
+    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?, isPostTextRevealed: Bool) -> NewsFeedCellSizes
 }
 
 struct CellSizes: NewsFeedCellSizes {
     var textFrame: CGRect
+    var moreTextButtonFrame: CGRect
     var photoAttachmentFrame: CGRect
     var bottomViewFrame: CGRect
     var totalHeight: CGFloat
@@ -29,20 +30,34 @@ final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
         self.screenWidth = screenWidth
     }
     
-    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?) -> NewsFeedCellSizes {
+    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?, isPostTextRevealed: Bool) -> NewsFeedCellSizes {
         
         let cardViewWidth = screenWidth - Constants.cardViewInsets.left - Constants.cardViewInsets.right
+        
+        var isShowMoreTextButtonHidden = true
         
         // MARK: - post text frame
         var postTextFrame = CGRect(origin: CGPoint(x: Constants.postTextInsets.left, y: Constants.postTextInsets.top), size: CGSize.zero)
         if let text = postText, !text.isEmpty {
             let width = cardViewWidth - Constants.postTextInsets.left - Constants.postTextInsets.right
-            let height = text.height(width: width, font: Constants.postTextFont)
+            var height = text.height(width: width, font: Constants.postTextFont)
+            
+            // MARK: - show more text button flag
+            let postTextVisibleHeightThreshold = Constants.postTextFont.lineHeight * Constants.minifiedPostLimitLines
+            if !isPostTextRevealed && (height > postTextVisibleHeightThreshold) {
+                height = Constants.postTextFont.lineHeight * Constants.minifiedPostLines
+                isShowMoreTextButtonHidden = false
+            }
+            
             postTextFrame.size = CGSize(width: width, height: height)
         }
         
+        // MARK: - more button frame
+        let showMoreTextButtonSize = isShowMoreTextButtonHidden ? CGSize.zero : Constants.showMoreTextButtonSize
+        let showMoreButtonFrame = CGRect(origin: CGPoint(x: Constants.showMoreButtonInsets.left, y: postTextFrame.maxY), size: showMoreTextButtonSize)
+                
         // MARK: - post photo attachment frame
-        let photoAttachmentTop = postTextFrame.size == CGSize.zero ? Constants.postTextInsets.top : postTextFrame.maxY + Constants.postTextInsets.bottom
+        let photoAttachmentTop = postTextFrame.size == CGSize.zero ? Constants.postTextInsets.top : showMoreButtonFrame.maxY + Constants.postTextInsets.bottom
         var postPhotoAttachmentFrame = CGRect(origin: CGPoint(x: 0, y: photoAttachmentTop), size: CGSize.zero)
         if let photoAttachment = postPhotoAttachment {
             
@@ -59,6 +74,7 @@ final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
         let totalHeight: CGFloat =  bottomViewFrame.maxY + Constants.cardViewInsets.bottom
         
         return CellSizes(textFrame: postTextFrame,
+                         moreTextButtonFrame: showMoreButtonFrame,
                          photoAttachmentFrame: postPhotoAttachmentFrame,
                          bottomViewFrame: bottomViewFrame,
                          totalHeight: totalHeight)
