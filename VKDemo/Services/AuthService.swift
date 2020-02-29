@@ -17,6 +17,9 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     var accessToken: String? {
         return VKSdk.accessToken()?.accessToken
     }
+    var userId: String? {
+        return VKSdk.accessToken()?.userId
+    }
     
     override init() {
         self.vkSdk = VKSdk.initialize(withAppId: appId)

@@ -11,7 +11,11 @@ import UIKit
 
 class WebImageView: UIImageView {
     
+    private var currentImageURL: String?
+    
     func set(imageURL: String?) {
+        
+        currentImageURL = imageURL
         
         guard let imageURL = imageURL, let url = URL(string: imageURL) else {
             self.image = nil
@@ -25,26 +29,21 @@ class WebImageView: UIImageView {
         }
         
         URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            if error != nil, let data = data, let response = response {
-                let image = UIImage(data: data)
+            if error != nil, let data = data, let response = response {                
                 DispatchQueue.main.async {
-                    self?.image = image
                     self?.handleLoadedData(data: data, response: response)
                 }
             }
         }.resume()
-        
-        /*do {
-            let imageData = try Data(contentsOf: url)
-            self.image = UIImage(data: imageData)
-        } catch {
-            print(error.localizedDescription)
-        }*/
     }
     
     private func handleLoadedData(data: Data, response: URLResponse) {
         guard let url = response.url else { return }
         let cachedResponse = CachedURLResponse(response: response, data: data)
         URLCache.shared.storeCachedResponse(cachedResponse, for: URLRequest(url: url))
+        
+        if url.absoluteString == currentImageURL {
+            self.image = UIImage(data: data)
+        }
     }
 }

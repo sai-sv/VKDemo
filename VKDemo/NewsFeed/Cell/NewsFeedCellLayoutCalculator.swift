@@ -11,7 +11,7 @@ import UIKit
 
 protocol NewsFeedCellLayoutCalculatorProtocol {
     
-    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?, isPostTextRevealed: Bool) -> NewsFeedCellSizes
+    func sizes(postText: String?, postPhotoAttachments: [FeedViewModel.CellPhotoAttachmentViewModel], isPostTextRevealed: Bool) -> NewsFeedCellSizes
 }
 
 struct CellSizes: NewsFeedCellSizes {
@@ -30,7 +30,7 @@ final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
         self.screenWidth = screenWidth
     }
     
-    func sizes(postText: String?, postPhotoAttachment: FeedViewModel.CellPhotoAttachmentViewModel?, isPostTextRevealed: Bool) -> NewsFeedCellSizes {
+    func sizes(postText: String?, postPhotoAttachments: [FeedViewModel.CellPhotoAttachmentViewModel], isPostTextRevealed: Bool) -> NewsFeedCellSizes {
         
         let cardViewWidth = screenWidth - Constants.cardViewInsets.left - Constants.cardViewInsets.right
         
@@ -59,11 +59,17 @@ final class NewsFeedCellLayoutCalculator: NewsFeedCellLayoutCalculatorProtocol {
         // MARK: - post photo attachment frame
         let photoAttachmentTop = postTextFrame.size == CGSize.zero ? Constants.postTextInsets.top : showMoreButtonFrame.maxY + Constants.postTextInsets.bottom
         var postPhotoAttachmentFrame = CGRect(origin: CGPoint(x: 0, y: photoAttachmentTop), size: CGSize.zero)
-        if let photoAttachment = postPhotoAttachment {
-            
-            let ratio = CGFloat(CGFloat(photoAttachment.height) / CGFloat(photoAttachment.width))
-            let height = CGFloat(cardViewWidth) * ratio
-            postPhotoAttachmentFrame.size = CGSize(width: cardViewWidth, height: height)
+        if let photoAttachment = postPhotoAttachments.first {
+            if postPhotoAttachments.count == 1 {
+                let ratio = CGFloat(CGFloat(photoAttachment.height) / CGFloat(photoAttachment.width))
+                let height = CGFloat(cardViewWidth) * ratio
+                postPhotoAttachmentFrame.size = CGSize(width: cardViewWidth, height: height)
+            } else if postPhotoAttachments.count > 1 {
+                let photosSizes: [CGSize] = postPhotoAttachments.map { CGSize(width: $0.width, height: $0.height) }
+                let rowHeight = GalleryCollectionViewRowLayout.rowHeight(superViewWidth: cardViewWidth, photosSizes: photosSizes)
+                let height = rowHeight! * CGFloat(GalleryCollectionViewRowLayout.numbersOfRows)
+                postPhotoAttachmentFrame.size = CGSize(width: cardViewWidth, height: height)
+            }
         }
         
         // MARK: - bottom view frame

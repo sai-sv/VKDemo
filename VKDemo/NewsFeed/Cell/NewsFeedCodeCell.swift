@@ -28,13 +28,27 @@ class NewsFeedCodeCell: UITableViewCell {
         return view
     }()
     
-    var postTextLabel: UILabel = {
+    /*var postTextLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.postTextFont
         label.numberOfLines = 0
 //        label.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         label.textColor = #colorLiteral(red: 0.227329582, green: 0.2323184013, blue: 0.2370472848, alpha: 1)
         return label
+    }()*/
+    
+    var postTextLabel: UITextView = {
+       var textView = UITextView()
+        textView.font = Constants.postTextFont
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
+        textView.dataDetectorTypes = .all
+        
+        let padding = textView.textContainer.lineFragmentPadding
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -padding, bottom: 0, right: -padding)
+        return textView
     }()
     
     var postImageView: WebImageView = {
@@ -42,6 +56,8 @@ class NewsFeedCodeCell: UITableViewCell {
 //        imageView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         return imageView
     }()
+    
+    let galleryCollectionView = GalleryCollectionView()
     
     var bottomView: UIView = {
         var view = UIView()
@@ -210,6 +226,7 @@ class NewsFeedCodeCell: UITableViewCell {
         cardView.addSubview(postTextLabel)
         cardView.addSubview(showMoreTextButton)
         cardView.addSubview(postImageView)
+        cardView.addSubview(galleryCollectionView)
         cardView.addSubview(bottomView)
         
         topView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 8).isActive = true
@@ -319,11 +336,19 @@ class NewsFeedCodeCell: UITableViewCell {
         dateLabel.text = model.date
         postTextLabel.text = model.text
         
-        if let photoAttachment = model.photoAttachment {
-            postImageView.set(imageURL: photoAttachment.photoURL)
+        if let photo = model.photoAttachments.first, model.photoAttachments.count == 1 {
+            postImageView.set(imageURL: photo.photoURL)
+            postImageView.frame = model.sizes.photoAttachmentFrame
             postImageView.isHidden = false
-        } else {
+            galleryCollectionView.isHidden = true
+        } else if model.photoAttachments.count > 1 {
+            galleryCollectionView.set(model: model.photoAttachments)
+            galleryCollectionView.frame = model.sizes.photoAttachmentFrame
+            galleryCollectionView.isHidden = false
             postImageView.isHidden = true
+        }  else {
+            postImageView.isHidden = true
+            galleryCollectionView.isHidden = true
         }
         
         likesLabel.text = model.likes
@@ -333,7 +358,6 @@ class NewsFeedCodeCell: UITableViewCell {
         
         postTextLabel.frame = model.sizes.textFrame
         showMoreTextButton.frame = model.sizes.moreTextButtonFrame
-        postImageView.frame = model.sizes.photoAttachmentFrame
         bottomView.frame = model.sizes.bottomViewFrame
     }
 }

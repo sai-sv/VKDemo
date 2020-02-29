@@ -34,10 +34,15 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
                 self?.presentData()
             }
             
-        case.revealPostText(let postId):
+        case .revealPostText(let postId):
             revealedPostIds.append(postId)
             presentData()
-            break
+            
+        case .getUsers:
+            dataFetcher.getUsers { [weak self] (response) in
+                guard let response = response else { return }
+                self?.presenter?.presentData(response: .userResponse(response: response))
+            }
         }
     }
     

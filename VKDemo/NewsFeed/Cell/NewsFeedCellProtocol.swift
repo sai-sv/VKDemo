@@ -18,7 +18,7 @@ protocol NewsFeedCellViewModel {
     var comments: String? { get }
     var reposts: String? { get }
     var views: String? { get }
-    var photoAttachment: NewsFeedCellPhotoAttachmentViewModel? { get }
+    var photoAttachments: [NewsFeedCellPhotoAttachmentViewModel] { get }
     var sizes: NewsFeedCellSizes { get }
 }
 

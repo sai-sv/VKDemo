@@ -35,6 +35,11 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
             
             viewController?.displayData(viewModel: .displayNewsFeed(viewModel: viewModel))
             break
+            
+        case .userResponse(let response):
+            let viewModel = UserViewModel(photoUrlString: response.photo100)
+            viewController?.displayData(viewModel: .displayUserInfo(viewModel: viewModel))
+            
         }
     }
     
@@ -44,15 +49,13 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         return profiles.first { $0.id == targetSourceId }
     }
     
-    private func photoViewModel(_ item: NewsFeedItem) -> FeedViewModel.CellPhotoAttachmentViewModel? {
-        let photos = item.attachments?.compactMap({ (attachment) in
-            attachment.photo
-        })
+    private func photoViewModel(_ item: NewsFeedItem) -> [FeedViewModel.CellPhotoAttachmentViewModel] {
+        guard let attachments = item.attachments else { return [] }
         
-        if let photo = photos?.first {
+        return attachments.compactMap({ (attachment) -> FeedViewModel.CellPhotoAttachmentViewModel? in
+            guard let photo = attachment.photo else { return nil }
             return FeedViewModel.CellPhotoAttachmentViewModel(photoURL: photo.url, width: photo.width, height: photo.height)
-        }
-        return nil
+        })
     }
     
     private func cellViewModel(_ item: NewsFeedItem, profiles: [UserProfile], groups: [GroupProfile], revealedPostIds: [Int]) -> FeedViewModel.CellViewModel {
@@ -64,23 +67,35 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         let date = Date(timeIntervalSince1970: item.date)
         let dateTitle = dateFormatter.string(from: date)
         
+        //let photoAttachmentViewModel = photoViewModel(item)
         let photoAttachmentViewModel = photoViewModel(item)
         
         // is post text revealed by user interaction
         let isPostTextRevealed = revealedPostIds.contains(postId)
         
-        let sizes = cellLayoutCalculator.sizes(postText: item.text, postPhotoAttachment: photoAttachmentViewModel, isPostTextRevealed: isPostTextRevealed)
+        let sizes = cellLayoutCalculator.sizes(postText: item.text, postPhotoAttachments: photoAttachmentViewModel, isPostTextRevealed: isPostTextRevealed)
         
         return FeedViewModel.CellViewModel(postId: postId,
                                            icon: profile?.photo ?? "",
                                            name: profile?.name ?? "",
                                            date: dateTitle,
                                            text: item.text,
-                                           likes: String(item.likes?.count ?? 0),
-                                           comments: String(item.comments?.count ?? 0),
-                                           reposts: String(item.reposts?.count ?? 0),
-                                           views: String(item.views?.count ?? 0),
-                                           photoAttachment: photoAttachmentViewModel,
+                                           likes: formattedCounter(item.likes?.count),
+                                           comments: formattedCounter(item.comments?.count),
+                                           reposts: formattedCounter(item.reposts?.count),
+                                           views: formattedCounter(item.views?.count),
+                                           photoAttachments: photoAttachmentViewModel,
                                            sizes: sizes)
+    }
+    
+    private func formattedCounter(_ count: Int?) -> String? {
+        guard let counter = count, counter > 0 else { return nil }
+        var string = String(counter)
+        if 4...6 ~= string.count {
+            string = String(string.dropLast(3)) + "K"
+        } else if string.count > 6 {
+            string = String(string.dropLast(6)) + "M"
+        }
+        return string
     }
 }

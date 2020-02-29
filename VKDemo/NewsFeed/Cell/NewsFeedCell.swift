@@ -57,12 +57,12 @@ class NewsFeedCell: UITableViewCell {
         dateLabel.text = model.date
         postTextLabel.text = model.text
         
-        if let photoAttachment = model.photoAttachment {
+        /*if let photoAttachment = model.photoAttachment {
             postImageView.set(imageURL: photoAttachment.photoURL)
             postImageView.isHidden = false
         } else {
             postImageView.isHidden = true
-        }
+        }*/
         
         likesLabel.text = model.likes
         commentsLabel.text = model.comments

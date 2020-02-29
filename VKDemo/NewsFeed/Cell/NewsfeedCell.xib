@@ -153,7 +153,7 @@
                 <outlet property="nameLabel" destination="azg-Xw-N6d" id="G2r-Xz-aQF"/>
                 <outlet property="postImageView" destination="jqC-wj-8Lh" id="o6k-dM-FGR"/>
                 <outlet property="postTextLabel" destination="KMz-8e-jhF" id="NTm-Pb-P7e"/>
-                <outlet property="repostsLabel" destination="OFb-hE-D8C" id="4ix-OM-IUQ"/>
+                <outlet property="sharesLabel" destination="OFb-hE-D8C" id="4ix-OM-IUQ"/>
                 <outlet property="viewsLabel" destination="5A2-wL-S7a" id="R6p-e6-y9h"/>
             </connections>
             <point key="canvasLocation" x="-303" y="-1527"/>

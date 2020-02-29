@@ -15,16 +15,19 @@ enum NewsFeed {
             enum RequestType {
                 case getNewsFeed
                 case revealPostText(postId: Int)
+                case getUsers
             }
         }
         struct Response {
             enum ResponseType {
                 case newsFeedResponse(response: NewsFeedResponse, revealedPostIds: [Int])
+                case userResponse(response: UserResponse)
             }
         }
         struct ViewModel {
             enum ViewModelData {
                 case displayNewsFeed(viewModel: FeedViewModel)
+                case displayUserInfo(viewModel: UserViewModel)
             }
         }
     }
@@ -42,7 +45,7 @@ struct FeedViewModel {
         var comments: String?
         var reposts: String?
         var views: String?
-        var photoAttachment: NewsFeedCellPhotoAttachmentViewModel?
+        var photoAttachments: [NewsFeedCellPhotoAttachmentViewModel]
         var sizes: NewsFeedCellSizes
     }
     
@@ -53,4 +56,8 @@ struct FeedViewModel {
     }
     
     var cells: [CellViewModel]
+}
+
+struct UserViewModel: TitleViewViewModel {
+    var photoUrlString: String?    
 }
