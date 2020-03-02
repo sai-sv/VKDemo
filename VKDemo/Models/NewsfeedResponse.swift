@@ -13,9 +13,10 @@ struct NewsFeedWrapper: Decodable {
 }
 
 struct NewsFeedResponse: Decodable {
-    let items: [NewsFeedItem]
-    let profiles: [UserProfile]
-    let groups: [GroupProfile]
+    var items: [NewsFeedItem]
+    var profiles: [UserProfile]
+    var groups: [GroupProfile]
+    var nextFrom: String
 }
 
 struct NewsFeedItem: Decodable {

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol VKDataFetcher {
-    func getNewsFeed(response: @escaping (NewsFeedResponse?) -> Void)
+    func getNewsFeed(startFrom: String?, response: @escaping (NewsFeedResponse?) -> Void)
     func getUsers(response: @escaping (UserResponse?) -> Void)
 }
 
@@ -43,14 +43,15 @@ class VKNetworkDataFetcher: NetworkDataFetcher, VKDataFetcher {
     }
     
     // MARK: - VKDataFetcher
-    func getNewsFeed(response: @escaping (NewsFeedResponse?) -> Void) {
+    func getNewsFeed(startFrom: String?, response: @escaping (NewsFeedResponse?) -> Void) {
      
         var components = URLComponents()
         components.scheme = VKURLConstants.scheme
         components.host = VKURLConstants.host
         components.path = VKURLConstants.getNewsfeedMethod
         let filters = URLQueryItem(name: "filters", value: "post, photo")
-        components.queryItems = [ filters, accessTokenItem, versionItem]
+        let startFromItem = URLQueryItem(name: "start_from", value: startFrom)
+        components.queryItems = [ filters, startFromItem, accessTokenItem, versionItem]    
         
         let request = URLRequest(url: components.url!)
         

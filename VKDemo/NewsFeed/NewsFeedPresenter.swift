@@ -26,20 +26,24 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     func presentData(response: NewsFeed.Model.Response.ResponseType) {
         
         switch response {
-        case .newsFeedResponse(let response, let revealedPostIds):
+        case .presentNewsFeed(let response, let revealedPostIds):
             let cells = response.items.map { (item) in
                 
                 cellViewModel(item, profiles: response.profiles, groups: response.groups, revealedPostIds: revealedPostIds)
-            }
-            let viewModel = FeedViewModel(cells: cells)
+            }            
+            let footerTitle = String.localizedStringWithFormat(NSLocalizedString("NewsFeedCellsCount", comment: ""), cells.count)
+            print(#function + footerTitle)
+            let viewModel = FeedViewModel(cells: cells, footerTitle: footerTitle)
             
             viewController?.displayData(viewModel: .displayNewsFeed(viewModel: viewModel))
             break
             
-        case .userResponse(let response):
-            let viewModel = UserViewModel(photoUrlString: response.photo100)
+        case .presentUserInfo(let response):
+            let viewModel = UserViewModel(photoUrlString: response?.photo100)
             viewController?.displayData(viewModel: .displayUserInfo(viewModel: viewModel))
             
+        case .presentFooterRefreshControl:
+            viewController?.displayData(viewModel: .displayFooterRefreshControl)
         }
     }
     

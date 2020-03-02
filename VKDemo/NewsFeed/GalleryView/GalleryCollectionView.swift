@@ -28,6 +28,7 @@ class GalleryCollectionView: UICollectionView {
         
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
+        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {

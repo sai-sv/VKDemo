@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8416D101240DA08C009C6527 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416D100240DA08C009C6527 /* FooterView.swift */; };
+		8416D103240DACCC009C6527 /* Localazible.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8416D102240DACCC009C6527 /* Localazible.stringsdict */; };
 		84472BEC2407E60F00D836D0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84472BEB2407E60F00D836D0 /* TitleView.swift */; };
 		84472BEF2407E92D00D836D0 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84472BEE2407E92D00D836D0 /* SearchTextField.swift */; };
 		84472BF12407F38B00D836D0 /* UsersWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84472BF02407F38B00D836D0 /* UsersWrapper.swift */; };
@@ -60,6 +62,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8416D100240DA08C009C6527 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		8416D102240DACCC009C6527 /* Localazible.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localazible.stringsdict; sourceTree = "<group>"; };
 		84472BEB2407E60F00D836D0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		84472BEE2407E92D00D836D0 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		84472BF02407F38B00D836D0 /* UsersWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersWrapper.swift; sourceTree = "<group>"; };
@@ -111,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8416D0FF240DA07D009C6527 /* FooterView */ = {
+			isa = PBXGroup;
+			children = (
+				8416D100240DA08C009C6527 /* FooterView.swift */,
+			);
+			path = FooterView;
+			sourceTree = "<group>";
+		};
 		84472BED2407E61B00D836D0 /* TitleView */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,13 +178,14 @@
 		8488C58423AFCE4E0037F8C0 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8416D0FF240DA07D009C6527 /* FooterView */,
 				84472BED2407E61B00D836D0 /* TitleView */,
 				844C2A0623F5A41300DE9F13 /* GalleryView */,
 				84CB559723B6B9D400C4FD10 /* Cell */,
+				8488C58623AFCE6F0037F8C0 /* NewsFeedWorker.swift */,
 				8488C58A23AFCE6F0037F8C0 /* NewsFeedInteractor.swift */,
 				8488C58523AFCE6F0037F8C0 /* NewsFeedPresenter.swift */,
 				8488C58923AFCE6F0037F8C0 /* NewsFeedViewController.swift */,
-				8488C58623AFCE6F0037F8C0 /* NewsFeedWorker.swift */,
 				8488C58723AFCE6F0037F8C0 /* NewsFeedRouter.swift */,
 				8488C58823AFCE6F0037F8C0 /* NewsFeedModels.swift */,
 				8488C59323AFCEAD0037F8C0 /* NewsFeed.storyboard */,
@@ -203,6 +216,7 @@
 		8488C5A023AFD1D60037F8C0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				8416D102240DACCC009C6527 /* Localazible.stringsdict */,
 				8488C57E23AFCE410037F8C0 /* Info.plist */,
 				8488C57923AFCE410037F8C0 /* Assets.xcassets */,
 			);
@@ -311,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8488C57D23AFCE410037F8C0 /* LaunchScreen.storyboard in Resources */,
+				8416D103240DACCC009C6527 /* Localazible.stringsdict in Resources */,
 				84CB559B23B6BB2A00C4FD10 /* NewsFeedCell.xib in Resources */,
 				8488C59423AFCEAD0037F8C0 /* NewsFeed.storyboard in Resources */,
 				8488C5A223AFD2390037F8C0 /* AuthScreen.storyboard in Resources */,
@@ -349,6 +364,7 @@
 				84CB558F23B6587100C4FD10 /* NetworkDataFetcher.swift in Sources */,
 				844C2A0523F5357200DE9F13 /* NewsFeedCellProtocol.swift in Sources */,
 				84CB559323B661B500C4FD10 /* NewsfeedResponse.swift in Sources */,
+				8416D101240DA08C009C6527 /* FooterView.swift in Sources */,
 				84CB558D23B6585500C4FD10 /* DataFetcher.swift in Sources */,
 				84CB55D023E9E61B00C4FD10 /* String + Height.swift in Sources */,
 				84472BEC2407E60F00D836D0 /* TitleView.swift in Sources */,

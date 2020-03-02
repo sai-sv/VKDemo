@@ -21,7 +21,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         control.addTarget(self, action: #selector(topRefreshAction), for: .valueChanged)
         return control
     }()
-    private var model = FeedViewModel(cells: [])
+    private lazy var footerView = FooterView()
+    private var model = FeedViewModel(cells: [], footerTitle: nil)
     
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
@@ -74,11 +75,14 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         
         switch viewModel {
         case .displayNewsFeed(let viewModel):
-            self.model = viewModel
-            self.tableView.reloadData()
-            self.topRefreshIndicator.endRefreshing()
+            model = viewModel
+            tableView.reloadData()
+            topRefreshIndicator.endRefreshing()
+            footerView.setTitle(title: viewModel.footerTitle)
         case .displayUserInfo(let viewModel):
             titleView.set(viewModel: viewModel)
+        case .displayFooterRefreshControl:
+            footerView.showIndicator()
         }
     }
     
@@ -91,6 +95,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     }
     
     private func setupTableView() {
+        tableView.contentInset.top = 8
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -101,6 +106,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         tableView.backgroundColor = .clear
         
         tableView.addSubview(topRefreshIndicator)
+        tableView.tableFooterView = footerView
     }
     
     @objc private func topRefreshAction() {
@@ -137,6 +143,16 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = model.cells[indexPath.row]
         return cellViewModel.sizes.totalHeight
+    }
+}
+
+extension NewsFeedViewController {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > (scrollView.contentSize.height * 0.9) {
+            print(#function, "getNextBatch")
+            interactor?.makeRequest(request: .getNextBatch)
+        }
     }
 }
 
