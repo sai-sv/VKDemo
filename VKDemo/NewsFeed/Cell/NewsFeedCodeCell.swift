@@ -14,30 +14,21 @@ class NewsFeedCodeCell: UITableViewCell {
     
     weak var delegate: NewsFeedCodeCellDelegate?
     
-    var cardView: UIView = {
+    private var cardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return view
     }()
     
-    var topView: UIView = {
+    private var topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         return view
     }()
     
-    /*var postTextLabel: UILabel = {
-        let label = UILabel()
-        label.font = Constants.postTextFont
-        label.numberOfLines = 0
-//        label.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        label.textColor = #colorLiteral(red: 0.227329582, green: 0.2323184013, blue: 0.2370472848, alpha: 1)
-        return label
-    }()*/
-    
-    var postTextLabel: UITextView = {
+    private var postTextLabel: UITextView = {
        var textView = UITextView()
         textView.font = Constants.postTextFont
         textView.isEditable = false
@@ -51,15 +42,15 @@ class NewsFeedCodeCell: UITableViewCell {
         return textView
     }()
     
-    var postImageView: WebImageView = {
+    private var postImageView: WebImageView = {
         let imageView = WebImageView()
 //        imageView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         return imageView
     }()
     
-    let galleryCollectionView = GalleryCollectionView()
+    private let galleryCollectionView = GalleryCollectionView()
     
-    var bottomView: UIView = {
+    private var bottomView: UIView = {
         var view = UIView()
 //        view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
@@ -67,14 +58,14 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: - topView layers
-    var iconImageView: WebImageView = {
+    private var iconImageView: WebImageView = {
         let view = WebImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
         return view
     }()
     
-    var nameLabel: UILabel = {
+    private var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -84,7 +75,7 @@ class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    var dateLabel: UILabel = {
+    private var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
@@ -94,14 +85,14 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: - bottomView - likes layer
-    var likesView: UIView = {
+    private var likesView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var likesImageView: UIImageView = {
+    private var likesImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "like")
@@ -119,14 +110,14 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: bottomView - comments layer
-    var commentsView: UIView = {
+    private var commentsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
         return view
     }()
     
-    var commentsImageView: UIImageView = {
+    private var commentsImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "comment")
@@ -134,7 +125,7 @@ class NewsFeedCodeCell: UITableViewCell {
         return image
     }()
     
-    var commentsLabel: UILabel = {
+    private var commentsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -144,14 +135,14 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: - bottomView - shares layer
-    var sharesView: UIView = {
+    private var sharesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.03537632042, green: 0.5067929482, blue: 0.3727167694, alpha: 1)
         return view
     }()
     
-    var sharesImageView: UIImageView = {
+    private var sharesImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "share")
@@ -159,7 +150,7 @@ class NewsFeedCodeCell: UITableViewCell {
         return image
     }()
     
-    var sharesLabel: UILabel = {
+    private var sharesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -169,14 +160,14 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: - bottomView - views
-    var viewsView: UIView = {
+    private var viewsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.1843137255, blue: 0.1921568627, alpha: 1)
         return view
     }()
     
-    var viewsImageView: UIImageView = {
+    private var viewsImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "eye")
@@ -184,7 +175,7 @@ class NewsFeedCodeCell: UITableViewCell {
         return image
     }()
     
-    var viewsLabel: UILabel = {
+    private var viewsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -194,7 +185,7 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // MARK: - show more button
-    var showMoreTextButton: UIButton = {
+    private var showMoreTextButton: UIButton = {
        let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.setTitle("Показать больше...", for: .normal)
@@ -325,7 +316,7 @@ class NewsFeedCodeCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    @objc func showMoreTextButtonAction() {
+    @objc private func showMoreTextButtonAction() {
         delegate?.revealPost(for: self)
     }
     

@@ -41,7 +41,7 @@ class TitleView: UIView {
         super.layoutSubviews()
         
         avatarView.layer.masksToBounds = true
-        avatarView.layer.cornerRadius = 10
+        avatarView.layer.cornerRadius = avatarView.frame.height / 2
     }
     
     override var intrinsicContentSize: CGSize {

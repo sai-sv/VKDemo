@@ -65,8 +65,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setupTopBars()
         setupTableView()
         
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        
         interactor?.makeRequest(request: .getNewsFeed)
         interactor?.makeRequest(request: .getUsers)
     }
@@ -87,7 +85,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     }
     
     private func setupTopBars() {
-        
         navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.shadowImage = UIImage()
         
